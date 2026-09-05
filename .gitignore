@@ -1,0 +1,41 @@
+# 构建产物
+build/
+build-*/
+cmake-build-*/
+compile_commands.json
+
+# 本地 IDE/工具配置
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+
+# 模型权重与大体积二进制文件
+model/
+*.engine
+*.onnx
+*.pt
+*.pth
+*.torchscript
+*.so
+*.a
+*.dll
+*.dylib
+
+# 本机配置与标定输出
+/config.yaml
+config/calibration.yaml
+calibration.yaml
+
+# 旧目录结构，不参与当前快照
+/apps/
+/pnp_vision/
+/tests/
+
+# 临时文件与缓存
+*.log
+*.tmp
+*.bak
+*~
+.cache/
+*.o

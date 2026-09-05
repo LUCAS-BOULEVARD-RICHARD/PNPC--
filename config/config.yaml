@@ -1,0 +1,59 @@
+# PNPCpp 主配置文件。
+# 所有任务可执行程序都会自动从项目根目录加载本文件。
+# 可通过 --config <路径> 指定其他配置文件，也可用命令行参数覆盖对应设置。
+
+camera:
+  mode: laptop        # laptop | hik
+  source: "0"         # USB/video index or a video file path
+  read_max_failures: 30
+  read_retry_delay_ms: 50
+
+exposure:
+  min_us: 8000        
+  max_us: 100000   
+  max_gain: 100     
+  gain_step_coarse: 0.25   
+  gain_step_fine: 0.05     
+  exposure_step_coarse: 1.5
+  exposure_step_fine: 1.1
+
+detection:
+  runtime: tensorrt  # auto | tensorrt | libtorch | onnx
+  model_path: ../model/labubu_yolov8n.engine
+  input_size: 640
+  confidence: 0.25
+  nms: 0.45
+  class_names:
+    - labubu
+    - toy
+  target_classes: []  # empty list means all classes
+
+calibration_file: calibration.yaml
+
+object:
+  width_m: 0.30
+  height_m: 0.30
+
+pnp:
+  axis_length_m: 0.15
+  yaw_sign: 1.0
+  pitch_sign: 1.0
+  min_z_m: 0.01
+  max_range_m: none  # none = no limit; use a number in meters to limit
+
+tracking:
+  cell_px: 24         # grid size used for matching previous target positions
+  radius_px: 48       # search radius for reusing a stale pose
+
+calibration:
+  pattern: "5x8"     # WxH checkerboard inner corners
+  square_m: 0.024
+  frames: 25
+  output: calibration.yaml
+
+window:
+  show: true
+  show_fps: true
+  show_rpy: true  # show Gimbal R/P/Y in the task4 HUD
+  show_target_panel: true  # right-side panel with XYZ and Gimbal R/P/Y
+  fps_limit: 40  # frames per second cap; 0 disables the cap
